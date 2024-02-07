@@ -1,0 +1,44 @@
+﻿
+@using AppData.Models
+@{
+    ViewData["Title"] = "Display Data";
+    string[] Table = new string[]
+    {
+        "ID", "Naziv", "Opis", "Cena", "Kolicina", "Proizvodjac", "DatumDodavanja"
+                            };
+}
+
+@model List<AppData.Models.MyModel>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
+{
+    <input class="form-control mr-sm-2" type="text" name="searchString" placeholder="Pretraga" />
+    <input class="btn btn-primary" type="submit" value="Pretraga" />
+    <a class="btn btn-primary" href="@Url.Action("ExportToExcel")">Izvezi u Excel</a>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                @foreach (var header in Table)
+                {
+                    <th>@header</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model)
+            {
+                <tr>
+                    <td>@row.ID</td>
+                    <td>@row.Naziv</td>
+                    <td>@row.Opis</td>
+                    <td>@row.Cena</td>
+                    <td>@row.Kolicina</td>
+                    <td>@row.Proizvodjac</td>
+                    <td>@row.DatumDodavanja</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
